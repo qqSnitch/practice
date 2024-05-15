@@ -1,0 +1,130 @@
+dCREATE TABLE publication (
+	id_public INT PRIMARY KEY AUTO_INCREMENT,
+	index_public INT NOT NULL,
+	type_public VARCHAR(50) NOT NULL,
+	name_public VARCHAR(50) NOT NULL,
+	price_public INT NOT NULL
+);
+
+CREATE TABLE recipients (
+	id_recipients INT PRIMARY KEY AUTO_INCREMENT,
+	name_rec VARCHAR(50) NOT NULL,
+	street_rec VARCHAR(50) NOT NULL,
+	num_home_rec INT NOT NULL,
+	num_flat_rec INT NOT NULL,
+	id_public INT NOT NULL,
+	period_rec INT NOT NULL,
+	FOREIGN KEY (id_public) REFERENCES publication(id_public)
+);
+
+CREATE TABLE delivery (
+	id_del INT PRIMARY KEY AUTO_INCREMENT,
+	id_recipients INT NOT NULL,
+	id_public INT NOT NULL,
+	del_date DATE NOT NULL,
+	FOREIGN KEY (id_recipients) REFERENCES recipients(id_recipients),
+	FOREIGN KEY (id_public) REFERENCES publication(id_public)
+);
+
+DROP TABLE delivery;
+DROP TABLE recipients;
+DROP TABLE publication;
+
+
+SELECT * FROM publication;
+SELECT * FROM recipients;
+SELECT * FROM delivery;
+
+INSERT INTO publication (index_public, type_public, name_public, price_public) VALUES
+(13123, 'Газета', 'Первая газета', 100),
+(31231, 'Журнал', 'Вторая газета', 150),
+(13123, 'Газета', 'Третья газета', 120),
+(32324, 'Журнал', 'Четвертая газета', 110),
+(12315, 'Газета', 'Пятая газета', 10),
+(66542, 'Журнал', 'Шестая газета', 90),
+(55379, 'Газета', 'Седьмая газета', 133),
+(13123, 'Журнал', 'Восьмая газета', 140),
+(34634, 'Газета', 'Девятая газета', 90),
+(42460, 'Журнал', 'Десятая газета', 35);
+
+INSERT INTO recipients (name_rec, street_rec, num_home_rec, num_flat_rec,id_public, period_rec) VALUES
+('Иванов Иван', 'Свободы', 12, 12,1, 2),
+('Петров Петр', 'Пролетарская', 10, 11,10,23),
+('Сидоров Сергей', 'Красная', 15, 12,5,12),
+('Кузнецов Дмитрий', 'Пушкинская', 3, 14,6,1),
+('Волкова Наталья', 'Ленина', 1, 15,4,3),
+('Соловьев Алексей', 'Октябрьская', 18, 1,3,6),
+('Морозова Мария', 'Красная', 20, 112,9,4),
+('Никифоров Николай', 'Тверская', 1, 155,2,11),
+('Степанова Елена', 'Спасская ', 123, 12,8,3),
+('Васильев Василий', 'Красная', 33, 232,7,9);
+
+INSERT INTO delivery (id_recipients, id_public,del_date) VALUES
+(1, 1, '2023-04-01'),
+(3, 1, '2020-01-01'),
+(10, 5, '2019-04-21'),
+(6, 7, '2010-12-04'),
+(2, 9, '2011-03-10'),
+(1, 2, '2017-02-23'),
+(7, 1, '2012-12-12'),
+(4, 6, '2024-04-24'),
+(6, 8, '2004-04-04'),
+(6, 9, '2001-01-02'),
+(8, 2, '2015-07-11'),
+(2, 4, '2028-09-07'),
+(10, 6, '1980-12-30'),
+(7, 8, '2000-03-06'),
+(9, 10, '2005-06-29');
+
+
+
+1 ЗАПРОС
+SELECT * FROM publication
+WHERE type_public = 'Газета' AND name_public LIKE 'П%';
+
+2 ЗАПРОС
+SELECT r.name_rec, r.street_rec, r.num_home_rec, r.num_flat_rec, p.name_public
+FROM recipients r
+JOIN delivery d ON r.id_recipients = d.id_recipients
+JOIN publication p ON d.id_public = p.id_public
+WHERE h.street_hum = 'Красная' AND p.index_pub = '13123';
+
+3 ЗАПРОС
+SELECT * FROM recipients
+WHERE street_rec = 'Красная' AND num_home_rec IN (1, 10, 33);
+
+4 ЗАПРОС
+SELECT * FROM publication WHERE index_public = 13123;
+
+5 ЗАПРОС
+SELECT * FROM public WHERE price_pub BETWEEN 10 AND 30;
+
+6 ЗАПРОС
+SELECT 
+    p.index_public, 
+    p.name_public, 
+    p.price_public, 
+    r.period_rec, 
+    p.price_public * r.period_rec AS cost
+FROM 
+    recipients r
+JOIN 
+    publication p ON r.id_public = p.id_public;
+
+7 ЗАПРОС
+SELECT 
+    type_public, 
+    AVG(price_public) AS avg
+FROM 
+    publication
+GROUP BY 
+    type_public;
+
+8 ЗАПРОС
+SELECT 
+    street_rec, 
+    COUNT(id_recipients) AS count
+FROM 
+    recipients
+GROUP BY 
+    street_rec;

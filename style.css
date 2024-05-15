@@ -1,0 +1,59 @@
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+input[type='number'],
+input[type="number"]:hover,
+input[type="number"]:focus {
+    appearance: none;
+    -moz-appearance: textfield;
+}
+html{
+    background-color: #121212;
+}
+/* Общий стиль для формы */
+form {
+    background-color: #121212; /* Темный фон для формы */
+    color: #F5F5F5; /* Белый цвет текста */
+    padding: 20px;
+    width: 300px;
+    margin: 0 auto; /* Центрирование формы */
+    border-radius: 5px; /* Скругление углов */
+}
+
+/* Стиль для поля select */
+select {
+    background-color: #2C2C2C; /* Темный фон для select */
+    color: #F5F5F5; /* Белый цвет текста */
+    border: 1px solid #333333; /* Темная граница */
+    padding: 5px;
+    width: 100%;
+    margin-bottom: 10px; /* Отступ снизу */
+}
+
+/* Стиль для поля ввода числа */
+input[type="number"] {
+    background-color: #2C2C2C; /* Темный фон для поля ввода */
+    color: #F5F5F5; /* Белый цвет текста */
+    border: 1px solid #333333; /* Темная граница */
+    padding: 5px;
+    width: 96%;
+    margin-bottom: 10px; /* Отступ снизу */
+}
+
+/* Стиль для кнопки отправки */
+button {
+    background-color: #007BFF; /* Яркий цвет фона для кнопки */
+    color: #FFFFFF; /* Белый цвет текста кнопки */
+    border: none; /* Удаление стандартной границы */
+    padding: 10px 20px;
+    cursor: pointer; /* Изменение курсора на указатель */
+    border-radius: 5px; /* Скругление углов */
+    width: 100%; /* Занимать всю ширину формы */
+}
+
+/* Стиль для кнопки отправки при наведении */
+button:hover {
+    background-color: #0056b3; /* Темнее оттенка при наведении */
+}

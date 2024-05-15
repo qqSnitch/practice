@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8">
+        <title>Форма</title>
+        <link href="style.css" rel="stylesheet" type="text/css">
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var select = document.getElementById('options');
+                var indexInput = document.getElementById('index');
+                var rangeLowInput = document.getElementById('range1');
+                var rangeHighInput = document.getElementById('range2');
+
+                // Скрываем поля ввода по умолчанию
+                indexInput.style.display = 'none';
+                rangeLowInput.style.display = 'none';
+                rangeHighInput.style.display = 'none';
+
+                select.addEventListener('change', function() {
+                    var selectedValue = this.value;
+
+                    if (selectedValue === '4') {
+                        // Показываем поле для ввода индекса
+                        indexInput.style.display = 'block';
+                        // Скрываем поля для ввода границ
+                        rangeLowInput.style.display = 'none';
+                        rangeHighInput.style.display = 'none';
+                    } else if (selectedValue === '5') {
+                        // Скрываем поле для ввода индекса
+                        indexInput.style.display = 'none';
+                        // Показываем поля для ввода границ
+                        rangeLowInput.style.display = 'block';
+                        rangeHighInput.style.display = 'block';
+                    } else {
+                        // Скрываем все поля ввода
+                        indexInput.style.display = 'none';
+                        rangeLowInput.style.display = 'none';
+                        rangeHighInput.style.display = 'none';
+                    }
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <form method="POST" action="form.php">
+            <label>Выберите задание:<br><br>
+                <select name="options" id="options">
+                    <option value="1">Задание №1</option>
+                    <option value="2">Задание №2</option>
+                    <option value="3">Задание №3</option>
+                    <option value="4">Задание №4</option>
+                    <option value="5">Задание №5</option>
+                    <option value="6">Задание №6</option>
+                    <option value="7">Задание №7</option>
+                    <option value="8">Задание №8</option>
+                </select>
+            </label>
+            <input type="number" id="index" name="index" placeholder="Введите индекс">
+            <input type="number" id="range1" name="rangelow" placeholder="Нижняя граница">
+            <input type="number" id="range2" name="rangehight" placeholder="Вверхняя граница">
+            <button type="submit">Выбрать</button>
+        </form>
+    </body>
+</html>
